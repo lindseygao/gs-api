@@ -20,6 +20,12 @@ public class InvestmentDetail {
     public void setCategory(String category) {
         this.category = category;
     }
+    public String getMinimum() {
+        return minimum;
+    }
+    public void setMinimum(String minimum) {
+        this.minimum = minimum;
+    }
     public List<String> getData() {
         return data;
     }
