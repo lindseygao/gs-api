@@ -84,6 +84,13 @@ public class InvestingForecastService {
 
     // Lindsey: Ask group if it is ok to combine getRisk() & getForeCast() & return
     // a 2 element array: [List<Double>, List<Double>]
+
+    /**
+     * Computes a List of the variability of returns where index 0 represents variability for year 0
+     * @param userRequest User's percentages
+     * @param details List of InvestmentDetail objects created from historical data
+     * @return List<Double> of variability of returns for future years 0-9
+     */
     public List<Double> getRisk(Map<String, Double> userRequest, List<InvestmentDetail> details) {
         Map<Integer, Double> riskForYear = new TreeMap<>(); // Maps the year to variability of return for that year
         double rawSD = 0.0;
@@ -92,17 +99,18 @@ public class InvestingForecastService {
             double categoryVariabilityRatio = calculateSD(i.getData()) / 100;
             rawSD += userInvestmentRatio * categoryVariabilityRatio;
         }
-        riskForYear.put(0, 10000*rawSD);
+        riskForYear.put(0, 10000 * rawSD);
         for (int x = 1; x < 10; x++) {
-            riskForYear.put(x, riskForYear.get(x - 1)*rawSD);
+            riskForYear.put(x, riskForYear.get(x - 1) * rawSD);
         }
         return new ArrayList<>(riskForYear.values());
     }
 
     /**
      * Calculates the standard deviation of array of data
-     * @param numArray array of doubles to find the standard deviation of
-     * @return {Double} A numerical value for the standard deviation
+     * @param numArray array of Strings that can be converted to doubles to find
+     *                 the standard deviation of
+     * @return {double} A numerical value for the standard deviation
      */
     private double calculateSD(List<String> numArray) {
         List<Double> listOfDouble = stringToDoubleList(numArray);
@@ -119,6 +127,12 @@ public class InvestingForecastService {
         return Math.sqrt(variance / length);
     }
 
+    /**
+     * Converts a List<String> to List<Double>
+     * Assumes the String can be casted to Double
+     * @param numArrayInString
+     * @return List<Double>
+     */
     private List<Double> stringToDoubleList(List<String> numArrayInString) {
         List<Double> result = new ArrayList<>();
         for (int i = 0; i < numArrayInString.size(); i++) {
