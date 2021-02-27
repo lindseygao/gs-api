@@ -26,5 +26,6 @@ public class InvestmentDetail {
     public void setData(List<String> data) {
         this.data = data;
     }
+
 }
 
