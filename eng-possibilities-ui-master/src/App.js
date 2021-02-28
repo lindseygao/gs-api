@@ -1,7 +1,8 @@
 import { Container } from "react-bootstrap";
 
 import NavBar from "./components/NavBar";
-import ForecasterHome from './pages/Forecaster'
+import ForecasterHome from './pages/Forecaster/index.js';
+import InputForm from './pages/Forecaster/InputForm.js'
 
 import "./App.css";
 
@@ -12,6 +13,7 @@ function App() {
         <NavBar />
         <Container fluid>
          <ForecasterHome/>
+         <InputForm/>
         </Container>
       </Container>
     </div>
