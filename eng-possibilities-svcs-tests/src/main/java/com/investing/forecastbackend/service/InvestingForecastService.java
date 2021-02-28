@@ -48,23 +48,21 @@ public class InvestingForecastService {
     public ForecastResponse getInvestmentOptions(final ForecastRequest request) throws IOException {
         List<InvestmentDetail> details = getInvestmentOptions();
         // TODO write algorithm to calculate investment forecast from request configuration
-        List<Double> result = getForeCast(request.getRequest(), details); // list of predicted returns for year 1-10
+        List<List<Double>> result = getForeCast(request.getRequest(), details); // list of predicted returns for year 1-10
         ForecastResponse response = new ForecastResponse();
         response.setResponse(result);
         return response;
     }
 
-    public List<Double> getForeCast(Map<String, Double> userRequest, List<InvestmentDetail> details) {
-        Map<Integer, Double> totalYearAmount = getForeCastHelper(userRequest, details);
-        return new ArrayList<>(totalYearAmount.values()); // return ArrayList of returns for each year
-    }
-
-    private Map<Integer, Double> getForeCastHelper(Map<String, Double> userRequest, List<InvestmentDetail> details) {
-        Map<Integer, Double> totalYearAmount = new TreeMap<>(); // maps year => return value
+    public List<List<Double>> getForeCast(Map<String, Double> userRequest, List<InvestmentDetail> details) {
+        Map<Integer, Double> totalYearAmount = new TreeMap<>();
+        Map<Integer, Double> riskForYear = new TreeMap<>(); // Maps the year to variability of return for that year
         for (InvestmentDetail i : details) { // loop through categories in database
             //user input for category i
             double userInvestmentPercentage = userRequest.get(i.getCategory()); // user's percentage for that category
-            double userInvestmentDollars = (userInvestmentPercentage / 100) * 10000;
+            double userInvestmentDollars = (userInvestmentPercentage / 100) * 10000; // $ for category i
+            double categorySDRatio = calculateSD(i.getData()) / 100;
+            double weightedSD = (userInvestmentPercentage / 100) * categorySDRatio; // SD $ for category
             for (int x = 0; x < 10; x++) { // calculate the user return for curr category from year 1 to 10
 
                 //historical interest data for category i in year x
@@ -78,12 +76,18 @@ public class InvestingForecastService {
                 //continuously sum total for each investment i in year x
                 totalYearAmount.put(x, currentYearTotal + userInvestmentDollars); // update the return for each year
             }
+            for (int x = 0; x < 10; x++) {
+                riskForYear.put(x, riskForYear.getOrDefault(x, 0.0) + (totalYearAmount.get(x) * weightedSD));
+            }
         }
-        return totalYearAmount;
+        List<List<Double>> result = new ArrayList<>();
+        result.add(0, new ArrayList<>(totalYearAmount.values()));
+        result.add(1, new ArrayList<>(riskForYear.values()));
+        return result; // returned result: index 0 => graph values, index 1 => variability values
     }
 
-    // Lindsey: Ask group if it is ok to combine getRisk() & getForeCast() & return
-    // a 2 element array: [List<Double>, List<Double>]
+
+    // return a 2 element array: [List<Double>, List<Double>]
 
     /**
      * Computes a List of the variability of returns where index 0 represents variability for year 0
