@@ -2,24 +2,19 @@ import React, { Component } from "react";
 import { Form, Button, Row, Col } from "react-bootstrap";
 
 export default class InputForm extends Component {
-  constructor(props, context) {
+  constructor(props) {
     super();
     this.state = {
-      energy: 0,
-      technology: 0,
-      financial: 0,
-      realEstate: 0,
-      pharmaceutical: 0,
-      airline: 0,
-      retail: 0,
-      gaming: 0,
+      energy: '',
+      technology: '',
+      financial: '',
+      realEstate: '',
+      pharmaceutical: '',
+      airline: '',
+      retail: '',
+      gaming: '',
     };
-  }
-
-  onChange(e) {
-    this.setState({
-        [e.target.name]: e.target.value
-    });
+    this.onSubmit = this.onSubmit.bind(this);
   }
 
   onSubmit(e) {
@@ -45,74 +40,69 @@ export default class InputForm extends Component {
     .then(data => console.log(data));
 
     this.setState({
-      energy: 0,
-      technology: 0,
-      financial: 0,
-      realEstate: 0,
-      pharmaceutical: 0,
-      airline: 0,
-      retail: 0,
-      gaming: 0,
+      energy: '',
+      technology: '',
+      financial: '',
+      realEstate: '',
+      pharmaceutical: '',
+      airline: '',
+      retail: '',
+      gaming: '',
     });
   }
 
   render() {
     return(
-      <form>
+      <Form>
         <Row>
           <Col>
-            <Form.Group action={this.props.action} method={this.props.method} controlId="formEnergy" onSubmit={this.onSubmit}>
+            <Form.Group controlId="formEnergy">
               <Form.Label>Energy</Form.Label>
-              <Form.Control type="number" placeholder="0" />
+              <Form.Control type="number" placeholder="0" value={this.state.energy} onChange={e => this.setState({ energy: e.target.value })}/>
             </Form.Group>
 
             <Form.Group controlId="formTechnology">
               <Form.Label>Technology</Form.Label>
-              <Form.Control type="number" placeholder="0" />
+              <Form.Control type="number" placeholder="0" value={this.state.technology} onChange={e => this.setState({ technology: e.target.value })}/>
             </Form.Group>
 
             <Form.Group controlId="formFinancialServices">
               <Form.Label>Financial Services</Form.Label>
-              <Form.Control type="number" placeholder="0" />
+              <Form.Control type="number" placeholder="0" value={this.state.financial} onChange={e => this.setState({ financial: e.target.value })}/>
             </Form.Group>
 
             <Form.Group controlId="formRealEstate">
               <Form.Label>Real Estate</Form.Label>
-              <Form.Control type="number" placeholder="0" />
+              <Form.Control type="number" placeholder="0" value={this.state.realEstate} onChange={e => this.setState({ realEstate: e.target.value })}/>
             </Form.Group>
           </Col>
           <Col>
             <Form.Group controlId="formPharmaceuticals">
               <Form.Label>Pharmaceuticals</Form.Label>
-              <Form.Control type="number" placeholder="0" />
+              <Form.Control type="number" placeholder="0" value={this.state.pharmaceutical} onChange={e => this.setState({ pharmaceutical: e.target.value })}/>
             </Form.Group>
 
             <Form.Group controlId="formAirline">
               <Form.Label>Airline</Form.Label>
-              <Form.Control type="number" placeholder="0" />
+              <Form.Control type="number" placeholder="0" value={this.state.airline} onChange={e => this.setState({ airline: e.target.value })}/>
             </Form.Group>
 
             <Form.Group controlId="formRetail">
               <Form.Label>Retail</Form.Label>
-              <Form.Control type="number" placeholder="0" />
+              <Form.Control type="number" placeholder="0" value={this.state.retail} onChange={e => this.setState({ retail: e.target.value })}/>
             </Form.Group>
 
             <Form.Group controlId="formGaming">
               <Form.Label>Gaming</Form.Label>
-              <Form.Control type="number" placeholder="0" />
+              <Form.Control type="number" placeholder="0" value={this.state.gaming} onChange={e => this.setState({ gaming: e.target.value })}/>
             </Form.Group>
           </Col>
         </Row>
 
-        <Button variant="primary" type="submit">
+        <Button variant="primary" type="submit" onClick={this.onSubmit}>
           Submit
         </Button>
-      </form>
+      </Form>
     );
   }
 }
-
-InputForm.defaultProps = {
-  action: 'http://localhost:3000',
-  method: 'post'
-};
