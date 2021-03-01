@@ -31,7 +31,7 @@ public class InvestingForecastService {
         ObjectMapper objectMapper = new ObjectMapper();
 
         ArrayList read = (ArrayList) objectMapper.readValue(Paths
-                .get("/home/fetenh/DeepPockets/eng-possibilities-svcs/src/main/resources/data/investment-details.json")
+                .get("src/main/resources/data/investment-details.json")
                 .toFile(), Map.class).get("Investments");
 
         String str = objectMapper.writeValueAsString(read);
