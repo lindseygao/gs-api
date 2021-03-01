@@ -25,22 +25,24 @@ export default class InputForm extends Component {
   onSubmit(e) {
     e.preventDefault();
 
-    fetch(this.props.formAction, {
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          energy: this.state.energy,
-          technology: this.state.technology,
-          financial: this.state.financial,
-          realEstate: this.state.realEstate,
-          pharmaceutical: this.state.pharmaceutical,
-          airline: this.state.airline,
-          retail: this.state.retail,
-          gaming: this.state.gaming,
-        })
-    });
+    fetch('http://localhost:8080/api/v1/forecast', {
+      type: "POST",
+      headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        energy: this.state.energy,
+        technology: this.state.technology,
+        financial: this.state.financial,
+        realEstate: this.state.realEstate,
+        pharmaceutical: this.state.pharmaceutical,
+        airline: this.state.airline,
+        retail: this.state.retail,
+        gaming: this.state.gaming,
+      })
+    }).then(response => response.json())
+    .then(data => console.log(data));
 
     this.setState({
       energy: 0,
