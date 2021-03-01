@@ -6,6 +6,7 @@ const ForecasterHome = () => {
        <div>
             <h3>Investment Forecaster</h3>
             <p>Logic goes here</p>
+            
           </div>
     </>
   );
