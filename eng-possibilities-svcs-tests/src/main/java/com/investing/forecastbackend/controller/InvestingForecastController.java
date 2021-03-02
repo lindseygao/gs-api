@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
@@ -25,7 +27,7 @@ import java.util.Map;
 
 @Slf4j
 @RestController
-@RequestMapping("/api/v1/forecast")
+//@RequestMapping("/api/v1/forecast")
 @AllArgsConstructor
 public class InvestingForecastController {
     private static final Logger log = LoggerFactory.getLogger(InvestingForecastController.class);
@@ -36,15 +38,19 @@ public class InvestingForecastController {
     @Autowired
     private ObjectMapper objectMapper;
 
-    @GetMapping
+//    @GetMapping
+    @RequestMapping(value="/api/v1/investoptions", method = RequestMethod.GET)
+    @ResponseBody
     public ResponseEntity<List<InvestmentDetail>> getInvestmentOptions() throws IOException {
         objectMapper = new ObjectMapper();
         log.info("Received request to retrieve investment options");
         return ResponseEntity.ok(service.getInvestmentOptions());
     }
 
-    @PostMapping
+//    @PostMapping
     @SneakyThrows
+    @RequestMapping(value="/api/v1/forecast", method = RequestMethod.POST)
+    @ResponseBody
     public ResponseEntity<ForecastResponse> getInvestmentOptions(@RequestBody final ForecastRequest request) throws IOException {
         log.info("Received request to forecast investment: {}", objectMapper.writeValueAsString(request));
         return ResponseEntity.ok(service.getInvestmentOptions(request));
