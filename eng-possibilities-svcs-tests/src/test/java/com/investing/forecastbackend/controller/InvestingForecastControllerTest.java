@@ -30,11 +30,11 @@ class InvestingForecastControllerTest {
 
     @Test
     void getInvestmentOptionsTest() throws Exception {
-        mvc.perform(get("/api/v1/forecast")
+        mvc.perform(get("/api/v1/investoptions")
                 .contentType(APPLICATION_JSON))
                 .andExpect(status().isOk());
 
-        String response = mvc.perform(get("/api/v1/forecast")
+        String response = mvc.perform(get("/api/v1/investoptions")
                 .contentType(APPLICATION_JSON)).andReturn()
                 .getResponse()
                 .getContentAsString();
