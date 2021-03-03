@@ -5,47 +5,47 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'r
 const data = [
   {
       year: '2021',
-      'Value ($)': this.state.values[0],
+      'Value ($)': 10000,
   },
   {
       year: '2022',
-      'Value ($)': this.state.values[1],
+      'Value ($)': 11000,
   },
   {
       year: '2023',
-      'Value ($)': this.state.values[2],
+      'Value ($)': 11100,
   },
   {
       year: '2024',
-      'Value ($)': this.state.values[3],
+      'Value ($)': 11111,
   },
   {
       year: '2025',
-      'Value ($)': this.state.values[4],
+      'Value ($)': 13000,
   },
   {
       year: '2026',
-      'Value ($)': this.state.values[5],
+      'Value ($)': 14000,
   },
   {
       year: '2027',
-      'Value ($)': this.state.values[6],
+      'Value ($)': 16000,
   },
   {
       year: '2028',
-      'Value ($)': this.state.values[7],
+      'Value ($)': 20000,
   },
   {
       year: '2029',
-      'Value ($)': this.state.values[8],
+      'Value ($)': 21000,
   },
   {
       year: '2030',
-      'Value ($)': this.state.values[9],
+      'Value ($)': 24000,
   },
   {
       year: '2031',
-      'Value ($)': this.state.values[10],
+      'Value ($)': 25000,
   },
 ];
 
