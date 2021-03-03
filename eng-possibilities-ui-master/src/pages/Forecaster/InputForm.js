@@ -63,7 +63,7 @@ export default class InputForm extends Component {
       gaming: '',
       limitations: [],
       values: [],
-      total: 0, 
+      total: 0,
     };
     this.onSubmit = this.onSubmit.bind(this);
   }
@@ -77,34 +77,34 @@ export default class InputForm extends Component {
       .then(response => response.json())
       .then(data => {
           this.setState({ limitations: data })
-          if (Number(this.state.energy) < Number(limitations[0].minimum)) {
+          if (Number(this.state.energy) < Number(this.state.limitations[0].minimum)) {
             console.log("did not reach energy minimum");
-          } 
-          if (Number(this.state.technology) < Number(limitations[1].minimum)) {
-            console.log("did not reach technology minimum");
-          } 
-          if (Number(this.state.financial) < Number(limitations[2].minimum)) {
-            console.log("did not reach financial minimum");
-          } 
-          if (Number(this.state.realEstate) < Number(limitations[3].minimum)) {
-            console.log("did not reach realEstate minimum");
-          } 
-          if (Number(this.state.pharmaceutical) < Number(limitations[4].minimum)) {
-            console.log("did not reach pharmaceutical minimum");
-          } 
-          if (Number(this.state.airline) < Number(limitations[5].minimum)) {
-            console.log("did not reach airline minimum");
-          } 
-          if (Number(this.state.retail) < Number(limitations[6].minimum)) {
-            console.log("did not reach retail minimum");
-          } 
-          if (Number(this.state.gaming) < Number(limitations[7].minimum)) {
-            console.log("did not reach gaming minimum");
-          } 
-          for (var i = 0; i < limitations.length; i++) {
-            total = total + Number(limitations[i].minimum);
           }
-          if (total != 100) {
+          if (Number(this.state.technology) < Number(this.state.limitations[1].minimum)) {
+            console.log("did not reach technology minimum");
+          }
+          if (Number(this.state.financial) < Number(this.state.limitations[2].minimum)) {
+            console.log("did not reach financial minimum");
+          }
+          if (Number(this.state.realEstate) < Number(this.state.limitations[3].minimum)) {
+            console.log("did not reach realEstate minimum");
+          }
+          if (Number(this.state.pharmaceutical) < Number(this.state.limitations[4].minimum)) {
+            console.log("did not reach pharmaceutical minimum");
+          }
+          if (Number(this.state.airline) < Number(this.state.limitations[5].minimum)) {
+            console.log("did not reach airline minimum");
+          }
+          if (Number(this.state.retail) < Number(this.state.limitations[6].minimum)) {
+            console.log("did not reach retail minimum");
+          }
+          if (Number(this.state.gaming) < Number(this.state.limitations[7].minimum)) {
+            console.log("did not reach gaming minimum");
+          }
+          for (var i = 0; i < this.state.limitations.length; i++) {
+            this.state.total = this.state.total + Number(this.state.limitations[i].minimum);
+          }
+          if (this.state.total != 100) {
             console.log("did not invest valid amount")
           }
     });
