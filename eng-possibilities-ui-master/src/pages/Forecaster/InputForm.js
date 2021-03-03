@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Form, Button, Row, Col } from "react-bootstrap";
-import React, { PureComponent } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 
 const data = [
