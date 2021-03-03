@@ -89,7 +89,7 @@ export default class InputForm extends Component {
           if (Number(this.state.realEstate) < Number(limitations[3].minimum)) {
             console.log("did not reach realEstate minimum");
           } 
-          if (Number(this.state.pharmaceutical < Number(limitations[4].minimum)) {
+          if (Number(this.state.pharmaceutical) < Number(limitations[4].minimum)) {
             console.log("did not reach pharmaceutical minimum");
           } 
           if (Number(this.state.airline) < Number(limitations[5].minimum)) {
