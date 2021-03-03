@@ -15,7 +15,6 @@ function App() {
         <NavBar />
         <Container fluid>
          <ForecasterHome/>
-         <LineGraph/>
          <InputForm/>
         </Container>
       </Container>
