@@ -63,6 +63,7 @@ export default class InputForm extends Component {
       gaming: '',
       limitations: [],
       values: [],
+      total: 0, 
     };
     this.onSubmit = this.onSubmit.bind(this);
   }
@@ -76,30 +77,36 @@ export default class InputForm extends Component {
       .then(response => response.json())
       .then(data => {
           this.setState({ limitations: data })
-          if (this.state.energy < limitations[0].minimum) {
+          if (Number(this.state.energy) < Number(limitations[0].minimum)) {
             console.log("did not reach energy minimum");
           } 
-          if (this.state.technology < limitations[1].minimum) {
+          if (Number(this.state.technology) < Number(limitations[1].minimum)) {
             console.log("did not reach technology minimum");
           } 
-          if (this.state.financial < limitations[2].minimum) {
+          if (Number(this.state.financial) < Number(limitations[2].minimum)) {
             console.log("did not reach financial minimum");
           } 
-          if (this.state.realEstate < limitations[3].minimum) {
+          if (Number(this.state.realEstate) < Number(limitations[3].minimum)) {
             console.log("did not reach realEstate minimum");
           } 
-          if (this.state.pharmaceutical < limitations[4].minimum) {
+          if (Number(this.state.pharmaceutical < Number(limitations[4].minimum)) {
             console.log("did not reach pharmaceutical minimum");
           } 
-          if (this.state.airline < limitations[5].minimum) {
+          if (Number(this.state.airline) < Number(limitations[5].minimum)) {
             console.log("did not reach airline minimum");
           } 
-          if (this.state.retail < limitations[6].minimum) {
+          if (Number(this.state.retail) < Number(limitations[6].minimum)) {
             console.log("did not reach retail minimum");
           } 
-          if (this.state.gaming < limitations[7].minimum) {
+          if (Number(this.state.gaming) < Number(limitations[7].minimum)) {
             console.log("did not reach gaming minimum");
           } 
+          for (var i = 0; i < limitations.length; i++) {
+            total = total + Number(limitations[i].minimum);
+          }
+          if (total != 100) {
+            console.log("did not invest valid amount")
+          }
     });
 
     fetch('http://localhost:8080/api/v1/forecast', {
@@ -119,7 +126,10 @@ export default class InputForm extends Component {
         gaming: this.state.gaming,
       })
     }).then(response => response.json())
-    .then(data => console.log(data));
+    .then(data => {
+      console.log(data);
+      this.setState({ values: data[0] })
+    });
 
     this.setState({
       energy: '',
