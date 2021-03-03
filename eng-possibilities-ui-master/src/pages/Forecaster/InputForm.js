@@ -61,6 +61,7 @@ export default class InputForm extends Component {
       airline: '',
       retail: '',
       gaming: '',
+      limitations: [],
       values: [],
     };
     this.onSubmit = this.onSubmit.bind(this);
@@ -74,7 +75,31 @@ export default class InputForm extends Component {
     fetch('http://localhost:8080/api/v1/investoptions')
       .then(response => response.json())
       .then(data => {
-          this.setState({ values: data })
+          this.setState({ limitations: data })
+          if (this.state.energy < limitations[0].minimum) {
+            console.log("did not reach energy minimum");
+          } 
+          if (this.state.technology < limitations[1].minimum) {
+            console.log("did not reach technology minimum");
+          } 
+          if (this.state.financial < limitations[2].minimum) {
+            console.log("did not reach financial minimum");
+          } 
+          if (this.state.realEstate < limitations[3].minimum) {
+            console.log("did not reach realEstate minimum");
+          } 
+          if (this.state.pharmaceutical < limitations[4].minimum) {
+            console.log("did not reach pharmaceutical minimum");
+          } 
+          if (this.state.airline < limitations[5].minimum) {
+            console.log("did not reach airline minimum");
+          } 
+          if (this.state.retail < limitations[6].minimum) {
+            console.log("did not reach retail minimum");
+          } 
+          if (this.state.gaming < limitations[7].minimum) {
+            console.log("did not reach gaming minimum");
+          } 
     });
 
     fetch('http://localhost:8080/api/v1/forecast', {
